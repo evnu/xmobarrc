@@ -1,0 +1,17 @@
+-- my simple xmobar config. put into ~/.xmobarrc
+Config { font = "xft:terminus:pixelsize=14:antialias=true:hinting=true"
+       , bgColor = "black"
+       , fgColor = "grey"
+       , position = TopW L 100
+       , lowerOnStart = False
+       , commands = [ Run StdinReader
+                    , Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10
+                    , Run Memory ["-t","Mem: <usedratio>%"] 10
+                    , Run Com "uname" ["-s","-r"] "" 36000
+                    , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+                    , Run Battery [] 2
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "<fc=#d8b365>%StdinReader%</fc> }{ %cpu% | %memory% | %battery% <fc=#5ab4ac>%date%</fc>"
+       }
